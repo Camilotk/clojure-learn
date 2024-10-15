@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aprenda Clojure</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.4/codemirror.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/scittle@0.6.17/dist/scittle.js" type="application/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.4/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.4/mode/clojure/clojure.min.js"></script>
+  <script type="application/x-scittle" src="script.cljs"></script>  
+  <script type="application/x-scittle" src="tutorial.cljs"></script>  
+  <style>
+    .code-mirror-wrapper {
+      height: 250px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      overflow: hidden;
+    }
+    .code-mirror {
+      height: 100%;
+      border: none;
+      border-radius: 6px;
+    }
+    .button-copy {
+      background-color: #f5f5f5;
+      border: 1px solid #ddd;
+    }
+    .output-area {
+      height: 250px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      background-color: #F5F5F5;
+    }
+    .output-area pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      height: 100%;
+    }
+    .code-mirror-scrollbar {
+      border-radius: 6px;
+    }
+    .buttons-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .select-container {
+      flex: 1;
+      margin: 0 10px;
+    }
+    .overlay-text {
+      position: absolute;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar is-light">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">Aprenda Clojure</a>
+      <span class="navbar-burger burger" data-target="navbarMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </div>
+    <div id="navbarMenu" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="#">Home</a>
+        <a class="navbar-item" href="#">Sobre</a>
+        <a class="navbar-item" href="#">Artigos</a>
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">Idioma</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item">Português</a>
+            <a class="navbar-item">Inglês</a>
+            <a class="navbar-item">Espanhol</a>
+            <a class="navbar-item">Francês</a>
+            <a class="navbar-item">Alemão</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- Main Content -->
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <!-- Text Content -->
+        <div class="column is-two-fifths" id="text-container">
+          <h1 id="title" class="title">Aprenda Clojure</h1>
+          <p id="subtitle" class="subtitle">Aprenda Clojure de forma interativa uma lição por vez.</p>
+          <div id="content1"></div>
+        </div>
+        <!-- Code Editor -->
+        <div class="column is-three-fifths">
+          <div class="field">
+            <label class="label">Código:</label>
+            <div class="control code-mirror-wrapper">
+              <textarea id="clj-input" class="code-mirror"></textarea>
+            </div>
+          </div>
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="button is-primary" id="execute-btn">Executar</button>
+            </div>
+            <div class="control">
+              <button class="button button-copy" id="copy-btn">Copiar</button>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Resultado:</label>
+            <div class="control output-area">
+              <pre id="result"></pre>
+            </div>
+          </div>
+          <div class="buttons-container">
+            <button class="button is-primary" id="prev-btn">Anterior</button>
+            <div class="select-container">
+              <div class="select is-fullwidth">
+                <select id="lesson-select"></select>
+              </div>
+            </div>
+            <button class="button is-primary" id="next-btn">Próxima</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/x-scittle">
+    (defn run-clojure [] 
+      (let [code         (js/window.editor.getValue)
+            result       (js/scittle.core.eval_string code)
+            output-area  (.getElementById js/document "result")]
+        (set! (.-innerText output-area) result)))
+    
+    ;; export function to use from JavaScript:
+    (set! (.-run_clojure js/window) run-clojure)
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      let currentLessonIndex = 0;
+      let lessons = [];
+
+      // Fetch the JSON file
+      const response = await fetch('clojure_lessons-pt-br.json');
+      const data = await response.json();
+      lessons = data.lessons;
+
+      // Populate the select dropdown with lesson titles
+      const select = document.getElementById('lesson-select');
+      lessons.forEach((lesson, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = lesson.title;
+        select.appendChild(option);
+      });
+
+      // Function to load a lesson by index
+      function loadLesson(index) {
+        const lesson = lessons[index];
+        document.getElementById('title').textContent = lesson.title;
+        document.getElementById('subtitle').textContent = lesson.subtitle;
+
+        const content1 = document.getElementById('content1');
+        if (lesson.text1 && lesson.image1 && !lesson.text2 && !lesson.image2) {
+          content1.innerHTML = `
+            <div style="position: relative;">
+              <p class="mb-5" style="text-align: justify">${lesson.text1}</p>
+              <img src="${lesson.image1}" alt="Image 1">
+            </div>
+          `;
+        } else if (lesson.text1 && lesson.image1 && lesson.text2 && lesson.image2) {
+          content1.innerHTML = `
+            <p class="mb-3" style="text-align: justify">${lesson.text1}</p>
+            <img src="${lesson.image1}" alt="Image 1">
+            <p class="mb-3" style="text-align: justify">${lesson.text2}</p>
+            <img src="${lesson.image2}" alt="Image 2">
+          `;
+        }
+
+        // Update the select dropdown to the current lesson
+        select.value = index;
+      }
+
+      // Load the initial lesson
+      loadLesson(currentLessonIndex);
+
+      // Event listener for "Próxima" button
+      document.getElementById('next-btn').addEventListener('click', () => {
+        if (currentLessonIndex < lessons.length - 1) {
+          currentLessonIndex++;
+          loadLesson(currentLessonIndex);
+        }
+      });
+
+      // Event listener for "Anterior" button
+      document.getElementById('prev-btn').addEventListener('click', () => {
+        if (currentLessonIndex > 0) {
+          currentLessonIndex--;
+          loadLesson(currentLessonIndex);
+        }
+      });
+
+      // Event listener for select dropdown
+      select.addEventListener('change', (event) => {
+        currentLessonIndex = parseInt(event.target.value, 10);
+        loadLesson(currentLessonIndex);
+      });
+
+      // Navbar toggle
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+      if ($navbarBurgers.length > 0) {
+        $navbarBurgers.forEach(el => {
+          el.addEventListener('click', () => {
+            const target = el.dataset.target;
+            const $target = document.getElementById(target);
+            el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+          });
+        });
+      }
+
+      // CodeMirror setup
+      const editor = CodeMirror.fromTextArea(document.getElementById('clj-input'), {
+        mode: 'clojure',
+        lineNumbers: false,
+        scrollbarStyle: 'native',
+        theme: 'default'
+      });
+
+      // Execute button
+      document.getElementById('execute-btn').addEventListener('click', () => {
+        run_clojure();
+      });
+
+      // Copy button
+      document.getElementById('copy-btn').addEventListener('click', () => {
+        const code = editor.getValue();
+        navigator.clipboard.writeText(code).then(() => {
+          alert('Código copiado!');
+        });
+      });
+
+      // Expose editor
+      window.editor = editor;
+    });
+  </script>
+</body>
+</html>
+

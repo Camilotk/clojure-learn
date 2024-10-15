@@ -1,0 +1,121 @@
+{
+  "lessons": [
+    {
+      "id": 0,
+      "title": "Aprenda Clojure",
+      "subtitle": "Aprenda Clojure uma lição por vez",
+      "text1": "O Clojure é uma linguagem funcional poderosa que funciona na JVM. Experimente o código diretamente aqui e veja o resultado.",
+      "text2": null,
+      "image1": "https://via.placeholder.com/600x400",
+      "image2": null
+    },
+    {
+      "id": 1,
+      "title": "Conheça Anna",
+      "subtitle": "Inicio da aventura",
+      "text1": "Barbara é uma menina de dez anos que precisa melhorar suas notas em culinária na Escola Mágica Doce Sonho. Porém, ela apenas sabe poucos encantamentos e isso requer Clojure. Sua cozinha é cheia tem um aroma de pão recém-assado e suas colheres podem se mexer sozinhas conhecendo o feitiço correto e ela está decidida a aprender tudo sobre Clojure e usar magia para cozinhar muitos doces com a ajuda de Whiskers seu gato familiar e a sua ajuda enquanto ela aprende junto com você!.",
+      "text2": null,
+      "image1": "https://via.placeholder.com/600x400",
+      "image2": null
+    },
+    {
+      "id": 2,
+      "title": "Primeiro código Clojure",
+      "subtitle": "Conhecendo o editor",
+      "text1": "O primeiro passo que você deve aprender é como usar o editor de código ao lado para escrever código na linguagem arcana Clojure e executar magias.",
+      "text2": "Digite (+ 1 2) na área de código ao lado e clique em 'Executar'.",
+      "image1": "https://via.placeholder.com/400x200",
+      "image2": "https://via.placeholder.com/400x200"
+    },
+    {
+      "id": 3,
+      "title": "Chamadas de Funções",
+      "subtitle": "Como funciona a chamada de funções em Clojure",
+      "text1": "Uma chamada de função em Clojure é escrita como '(mão?)', essa função nos diz o que Barbara está segurando. Escreva-a na área de código e a execute.",
+      "text2": "Todas as funções começam abrindo um parênteses, passando o nome da função que queremos chamar, seus argumentos separados por espaço e o parentêsis de fechamento. A função 'mão?' não tem argumentos, você pode ter qualquer número de argumentos, inclusive nenhum.",
+      "image1": "https://via.placeholder.com/400x200",
+      "image2": "https://via.placeholder.com/400x200"
+    },
+    {
+      "id": 4,
+      "title": "Efeitos no Mundo!",
+      "subtitle": "Fazendo as coisas acontecerem",
+      "text1": "Antes Barbara não tinha nada em mãos, mas você pode usar a função '(pegar :xicara)' para que ela pegue a xícara, como estamos mudando algo no mundo devemos receber :ok e como essa função diz para que ela segure a xicara se executarmos novamente a função '(mão?)' devemos receber ':xicara'.",
+      "text2": "Quando executamos uma ação que muda algo no mundo com Clojure recebemos uma resposta ':ok' significa que as coisas aconteceram como esperamos e quando recebemos uma resposta ':error' significa que algo não saiu como esperado.",
+      "image1": "https://via.placeholder.com/400x200",
+      "image2": "https://via.placeholder.com/400x200"
+    },
+    {
+      "id": 5,
+      "title": "Keywords",
+      "subtitle": "Palavras-chave...",
+      "text1": "Você deve ter notado algo diferente nos argumentos e respostas que recebemos. O nosso argumento era :xicara, isso é uma keyword. Algo que usamos em Clojure para dar nomes as coisas.",
+      "text2": "As keywords são palavras que começam com com dois pontos (:). Vamos usá-las para quando quisermos dar nomes e nos referir as coisas em nossa cozinha mágica.",
+      "image1": "https://via.placeholder.com/400x200",
+      "image2": "https://via.placeholder.com/400x200"
+    },
+    {
+      "id": 6,
+      "title": "Cozinhando Cookies",
+      "subtitle": "Aprendendo a primeira receita",
+      "text1": "",
+      "text2": "",
+      "image1": "https://via.placeholder.com/300x200",
+      "image2": "https://via.placeholder.com/300x200"
+    },
+    {
+      "id": 7,
+      "title": "Cozinhando Cookies",
+      "subtitle": "Aprendendo a primeira receita",
+      "text1": "",
+      "text2": "",
+      "image1": "https://via.placeholder.com/300x200",
+      "image2": "https://via.placeholder.com/300x200"
+    },
+    {
+      "id": 8,
+      "title": "Cozinhando Cookies",
+      "subtitle": "Aprendendo a primeira receita",
+      "text1": "",
+      "text2": "",
+      "image1": "https://via.placeholder.com/300x200",
+      "image2": "https://via.placeholder.com/300x200"
+    },
+    {
+      "id": 9,
+      "title": "Cozinhando Cookies",
+      "subtitle": "Aprendendo a primeira receita",
+      "text1": "",
+      "text2": "",
+      "image1": "https://via.placeholder.com/300x200",
+      "image2": "https://via.placeholder.com/300x200"
+    },
+    {
+      "id": 10,
+      "title": "Cozinhando Cookies",
+      "subtitle": "Aprendendo a primeira receita",
+      "text1": "",
+      "text2": "",
+      "image1": "https://via.placeholder.com/300x200",
+      "image2": "https://via.placeholder.com/300x200"
+    },
+    {
+      "id": 11,
+      "title": "Cozinhando Cookies",
+      "subtitle": "Aprendendo a primeira receita",
+      "text1": "",
+      "text2": "",
+      "image1": "https://via.placeholder.com/300x200",
+      "image2": "https://via.placeholder.com/300x200"
+    },
+    {
+      "id": 12,
+      "title": "Cozinhando Cookies",
+      "subtitle": "Aprendendo a primeira receita",
+      "text1": "",
+      "text2": "",
+      "image1": "https://via.placeholder.com/300x200",
+      "image2": "https://via.placeholder.com/300x200"
+    }
+  ]
+}
